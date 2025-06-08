@@ -1,0 +1,50 @@
+<h1>Gestión de Pacientes</h1>
+<form [formGroup]="pacienteForm" (ngSubmit)="agregarPaciente()">
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="nombre">
+    <mat-error
+    *ngIf="pacienteForm.get('nombre')?.hasError('required')">Nombre
+    es obligatorio</mat-error>
+    <mat-error
+    *ngIf="pacienteForm.get('nombre')?.hasError('minlength')">Mínimo
+    3 caracteres</mat-error>
+    <mat-error
+    *ngIf="pacienteForm.get('nombre')?.hasError('maxlength')">Máximo
+    25 caracteres</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="full-width">
+  <mat-label>Edad</mat-label>
+  <input matInput type="number" formControlName="edad">
+  <mat-error
+  *ngIf="pacienteForm.get('edad')?.hasError('required')">Edad es
+  obligatoria</mat-error>
+  <mat-error
+  *ngIf="pacienteForm.get('edad')?.hasError('min')">Edad mínima:
+  18</mat-error>
+  <mat-error
+  *ngIf="pacienteForm.get('edad')?.hasError('max')">Edad máxima:
+  99</mat-error>
+  </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Sexo</mat-label>
+    <mat-select formControlName="sexo">
+    <mat-option value="">Seleccione</mat-option>
+    <mat-option value="Masculino">Masculino</mat-option>
+    <mat-option value="Femenino">Femenino</mat-option>
+    </mat-select>
+    <mat-error
+    *ngIf="pacienteForm.get('sexo')?.hasError('required')">Debeseleccionar sexo</mat-error>
+  </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!pacienteForm.valid"> 
+      Agregar Paciente
+    </button>
+</form>
+<hr>
+<ul>
+<li *ngFor="let paciente of pacientes">
+{{ paciente.nombre }} - {{ paciente.edad }} años - {{
+paciente.sexo }}
+<button mat-raised-button color="primary" (click)="eliminarPaciente(paciente.id)">Eliminar</button>
+</li>
+</ul>

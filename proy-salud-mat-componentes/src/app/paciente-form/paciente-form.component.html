@@ -1,0 +1,30 @@
+<form [formGroup]="pacienteForm" (ngSubmit)="agregarPaciente()">
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre">
+            <mat-error
+            *ngIf="pacienteForm.get('nombre')?.invalid">Nombre entre 3 y 25
+            caracteres</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Edad</mat-label>
+            <input matInput type="number" formControlName="edad">
+            <mat-error
+            *ngIf="pacienteForm.get('edad')?.invalid">Edad entre 18 y 99</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Sexo</mat-label>
+            <mat-select formControlName="sexo">
+            <mat-option value="">Seleccione</mat-option>
+            <mat-option value="Masculino">Masculino</mat-option>
+            <mat-option value="Femenino">Femenino</mat-option>
+            </mat-select>
+            <mat-error
+            *ngIf="pacienteForm.get('sexo')?.invalid">Debe seleccionar sexo</mat-error>
+        </mat-form-field>
+        
+        <button mat-raised-button color="warn" type="submit"
+        [disabled]="pacienteForm.invalid">Agregar Paciente</button>
+</form>
